@@ -1,0 +1,86 @@
+<?php
+
+function queen_attack_menu(){
+    $items = array();
+    $items['queen_attack'] = array(
+        'title' => 'Queen Attack',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('queen_attack_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+// queen_attack_success here
+
+    $items['queen_attack_success'] = array(
+        'title' => 'Queen Attack Result',
+        'page callback' => 'queen_attack_success',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+function queen_attack_form(){
+    $form['queen_x'] = array(
+        '#title' => 'Queen\'s X Coordinate',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the Queen\'s X Coordinate'),
+    );
+
+    $form['queen_y'] = array(
+        '#title' => 'Queen\'s Y Coordinate',
+        '#type' => 'textfield',
+        '#description' => t('Now enter the Queen\'s Y Coordinate'),
+    );
+
+    $form['opponent_x'] = array(
+        '#title' => 'Opponent\'s X Coordinate',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the Opponent\'s X Coordinate'),
+    );
+
+    $form['opponent_y'] = array(
+        '#title' => 'Opponent\'s Y Coordinate',
+        '#type' => 'textfield',
+        '#description' => t( 'Please enter the Opponent\'s Y Coordinate'),
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Go',
+    );
+
+   return $form;
+}
+
+function queen_attack_form_submit($form, &$form_state){
+    $queen_x = $form_state['values']['queen_x'];
+    $queen_y = $form_state['values']['queen_y'];
+    $opponent_x = $form_state['values']['opponent_x'];
+    $opponent_y = $form_state['values']['opponent_y'];
+
+    $output = "";
+
+    // match vertical rows and vertical
+    if($queen_x == $opponent_x || $queen_y == $opponent_y ){
+        $output .= 'Queen Wins';
+    }
+
+    elseif ($opponent_x - $queen_x == $opponent_y - $queen_y){
+        $output .= 'Queen Wins';
+    }
+
+    else {
+        $output .= 'Opponent Wins';
+    }
+
+    $_SESSION['queen_attack_output'] = $output;
+    $form_state['redirect'] = 'queen_attack_success';
+
+}
+
+//queen_attack_success function
+function queen_attack_success(){
+    $output = '<h3>' . $_SESSION['queen_attack_output'] . '</h3>';
+    return $output;
+}

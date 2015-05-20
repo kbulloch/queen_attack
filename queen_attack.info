@@ -1,0 +1,5 @@
+name = Queen Attack
+core = 7.x
+description = two sets of coordinate inputs to rep chess board position of queen and the doomed opponent
+package = Custom modules
+files[] = queen_attack.module
