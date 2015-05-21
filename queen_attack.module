@@ -25,24 +25,32 @@ function queen_attack_form(){
         '#title' => 'Queen\'s X Coordinate',
         '#type' => 'textfield',
         '#description' => t('Please enter the Queen\'s X Coordinate'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
     );
 
     $form['queen_y'] = array(
         '#title' => 'Queen\'s Y Coordinate',
         '#type' => 'textfield',
         '#description' => t('Now enter the Queen\'s Y Coordinate'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
     );
 
     $form['opponent_x'] = array(
         '#title' => 'Opponent\'s X Coordinate',
         '#type' => 'textfield',
         '#description' => t('Please enter the Opponent\'s X Coordinate'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
     );
 
     $form['opponent_y'] = array(
         '#title' => 'Opponent\'s Y Coordinate',
         '#type' => 'textfield',
         '#description' => t( 'Please enter the Opponent\'s Y Coordinate'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
     );
 
     $form['submit'] = array(
