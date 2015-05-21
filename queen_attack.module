@@ -67,7 +67,7 @@ function queen_attack_form_submit($form, &$form_state){
     }
 
     elseif ($opponent_x - $queen_x == $opponent_y - $queen_y){
-        $output .= 'Queen Wins';
+        $output .= 'The Queen Wins';
     }
 
     else {
