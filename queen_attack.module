@@ -25,7 +25,7 @@ function queen_attack_form(){
         '#title' => 'Queen\'s X Coordinate',
         '#type' => 'textfield',
         '#description' => t('Please enter the Queen\'s X Coordinate'),
-        '#element_validate' => array('element_validate_integer_positive'),
+        '#element_validate' => array('element_validate_integer_positive', 'element_validate_range'),
         '#required' => TRUE,
     );
 
@@ -33,7 +33,7 @@ function queen_attack_form(){
         '#title' => 'Queen\'s Y Coordinate',
         '#type' => 'textfield',
         '#description' => t('Now enter the Queen\'s Y Coordinate'),
-        '#element_validate' => array('element_validate_integer_positive'),
+        '#element_validate' => array('element_validate_integer_positive', 'element_validate_range'),
         '#required' => TRUE,
     );
 
@@ -41,7 +41,7 @@ function queen_attack_form(){
         '#title' => 'Opponent\'s X Coordinate',
         '#type' => 'textfield',
         '#description' => t('Please enter the Opponent\'s X Coordinate'),
-        '#element_validate' => array('element_validate_integer_positive'),
+        '#element_validate' => array('element_validate_integer_positive', 'element_validate_range'),
         '#required' => TRUE,
     );
 
@@ -49,7 +49,7 @@ function queen_attack_form(){
         '#title' => 'Opponent\'s Y Coordinate',
         '#type' => 'textfield',
         '#description' => t( 'Please enter the Opponent\'s Y Coordinate'),
-        '#element_validate' => array('element_validate_integer_positive'),
+        '#element_validate' => array('element_validate_integer_positive', 'element_validate_range'),
         '#required' => TRUE,
     );
 
@@ -59,6 +59,12 @@ function queen_attack_form(){
     );
 
    return $form;
+}
+
+function element_validate_range($e) {
+    if ($e['#value'] > 8 || $e['#value'] < 1) {
+        form_error($e, t('You are off the board you nugget'));
+    }
 }
 
 function queen_attack_form_submit($form, &$form_state){
